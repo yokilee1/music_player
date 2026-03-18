@@ -5,14 +5,12 @@ import { View } from 'react-native'
 
 const PlaylistsScreenLayout = () => {
 	return (
-		<View style={defaultStyles.container}>
-			<Stack>
-				<Stack.Screen
-					name="index"
-					options={{ ...StackScreenWithSearchBar, headerTitle: 'Playlists' }}
-				/>
-			</Stack>
-		</View>
+		<Stack>
+			<Stack.Screen
+				name="index"
+				options={{ ...StackScreenWithSearchBar, headerTitle: 'Playlists' }}
+			/>
+		</Stack>
 	)
 }
 

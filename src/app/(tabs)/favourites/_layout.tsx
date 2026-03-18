@@ -5,14 +5,12 @@ import { View } from 'react-native'
 
 const FavouritesScreenLayout = () => {
 	return (
-		<View style={defaultStyles.container}>
-			<Stack>
-				<Stack.Screen
-					name="index"
-					options={{ ...StackScreenWithSearchBar, headerTitle: 'Favourites' }}
-				/>
-			</Stack>
-		</View>
+		<Stack>
+			<Stack.Screen
+				name="index"
+				options={{ ...StackScreenWithSearchBar, headerTitle: 'Favourites' }}
+			/>
+		</Stack>
 	)
 }
 
