@@ -1,5 +1,5 @@
 import { colors } from '@/constants/tokens'
-import { useNavigation } from 'expo-router'
+import { Href, useNavigation } from 'expo-router'
 import { useLayoutEffect, useState } from 'react'
 import { SearchBarProps } from 'react-native-screens'
 
@@ -10,11 +10,13 @@ const defaultSearchOptions: SearchBarProps = {
 
 export const useNavigationSearch = ({
 	searchBarOptions,
+	navigationTarget,
 }: {
 	searchBarOptions?: SearchBarProps
+	navigationTarget?: string | Href
 }) => {
 	const [search, setSearch] = useState('')
-	const navigation = useNavigation()
+	const navigation = useNavigation(navigationTarget)
 
 	const handleOnChangeText: SearchBarProps['onChangeText'] = ({ nativeEvent: { text } }) => {
 		setSearch(text)

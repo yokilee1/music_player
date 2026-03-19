@@ -1,6 +1,6 @@
 import { utilsStyles } from '@/styles'
 import { FlatList, FlatListProps, View } from 'react-native'
-import { Track } from 'react-native-track-player'
+import TrackPlayer, { Track } from 'react-native-track-player'
 import { TrackListItem } from './TrackListItem'
 
 // export type Track = {
@@ -19,8 +19,10 @@ const ItemDivider = () => (
 )
 
 export const TracksList = ({ tracks, ...flatlistProps }: TracksListProps) => {
-	const handleTrackSelect = (track: Track) => {
-		console.log('Selected track:', track)
+	const handleTrackSelect = async (track: Track) => {
+		// console.log('Selected track:', track)
+		await TrackPlayer.load(track)
+		await TrackPlayer.play()
 	}
 
 	return (
