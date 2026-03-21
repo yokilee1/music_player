@@ -3,7 +3,7 @@ import { formatSecondsToMinute } from '@/helper/miscellaneous'
 import { defaultStyles, utilsStyles } from '@/styles'
 import { StyleSheet, Text, View, ViewProps } from 'react-native'
 import { Slider } from 'react-native-awesome-slider'
-import { useSharedValue } from 'react-native-reanimated'
+import { useDerivedValue, useSharedValue } from 'react-native-reanimated'
 import TrackPlayer, { useProgress } from 'react-native-track-player'
 export const PlayerProgressBar = ({ style }: ViewProps) => {
 	const { duration, position } = useProgress(250)
@@ -16,9 +16,12 @@ export const PlayerProgressBar = ({ style }: ViewProps) => {
 	const trackElapsedTime = formatSecondsToMinute(position)
 	const trackRemainingTime = formatSecondsToMinute(duration - position)
 
-	if (!isSliding.value) {
-		progress.value = duration > 0 ? position / duration : 0
-	}
+	useDerivedValue(() => {
+		if (!isSliding.value) {
+			progress.value = duration > 0 ? position / duration : 0
+		}
+		return 0
+	}, [duration, position, isSliding])
 
 	return (
 		<View style={style}>
@@ -31,9 +34,9 @@ export const PlayerProgressBar = ({ style }: ViewProps) => {
 				renderBubble={() => null}
 				onSlidingStart={() => (isSliding.value = true)}
 				onValueChange={() => async (value: number) => {
-					await TrackPlayer.seekTo(value * duration)
+					progress.value = value
 				}}
-				onSlidingComplete={() => async (value) => {
+				onSlidingComplete={async (value) => {
 					if (!isSliding.value) return
 					isSliding.value = false
 					await TrackPlayer.seekTo(value * duration)
