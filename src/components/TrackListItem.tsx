@@ -1,10 +1,11 @@
 import { UNKNOWN_TRACK_IMAGE } from '@/constants/image'
 import { colors, fontSize } from '@/constants/tokens'
 import { defaultStyles } from '@/styles'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, Ionicons } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { Track, useActiveTrack } from 'react-native-track-player'
+import LoaderKit from 'react-native-loader-kit'
+import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player'
 
 export type TrackListItemProps = {
 	track: Track
@@ -12,6 +13,8 @@ export type TrackListItemProps = {
 }
 
 export const TrackListItem = ({ track, onTrackSelect: handleTrackSelect }: TrackListItemProps) => {
+	const { playing } = useIsPlaying()
+
 	const isActiveTrack = useActiveTrack()?.url == track.url
 
 	return (
@@ -28,6 +31,22 @@ export const TrackListItem = ({ track, onTrackSelect: handleTrackSelect }: Track
 						}}
 						contentFit="cover"
 					/>
+
+					{isActiveTrack &&
+						(playing ? (
+							<LoaderKit
+								style={styles.trackPlayingIconIndicator}
+								name="BallPulse"
+								color={colors.icon}
+							/>
+						) : (
+							<Ionicons
+								style={styles.trackPauseIconIndicator}
+								name="play"
+								size={24}
+								color={colors.icon}
+							/>
+						))}
 				</View>
 
 				<View
@@ -74,6 +93,20 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		width: 50,
 		height: 50,
+	},
+	trackPlayingIconIndicator: {
+		position: 'absolute',
+		top: 18,
+		left: 17,
+		width: 16,
+		height: 16,
+	},
+	trackPauseIconIndicator: {
+		position: 'absolute',
+		top: 14,
+		left: 14,
+		width: 22,
+		height: 22,
 	},
 	trackArtworkText: {
 		...defaultStyles.text,
