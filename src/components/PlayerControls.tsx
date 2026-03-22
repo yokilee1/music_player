@@ -41,7 +41,12 @@ export const PlayPauseButton = ({ style, iconSize }: PlayerButtonProps) => {
 
 export const SkipToNextButton = ({ iconSize = 30 }: PlayerButtonProps) => {
 	return (
-		<TouchableOpacity activeOpacity={0.7} onPress={() => TrackPlayer.skipToNext}>
+		<TouchableOpacity
+			activeOpacity={0.7}
+			onPress={async () => {
+				await TrackPlayer.skipToNext()
+			}}
+		>
 			<FontAwesome6 name="forward" size={iconSize} color={colors.text} />
 		</TouchableOpacity>
 	)
@@ -49,7 +54,12 @@ export const SkipToNextButton = ({ iconSize = 30 }: PlayerButtonProps) => {
 
 export const SkipToPreviousButton = ({ iconSize = 30 }: PlayerButtonProps) => {
 	return (
-		<TouchableOpacity activeOpacity={0.7} onPress={() => TrackPlayer.skipToPrevious}>
+		<TouchableOpacity
+			activeOpacity={0.7}
+			onPress={async () => {
+				await TrackPlayer.skipToPrevious()
+			}}
+		>
 			<FontAwesome6 name="backward" size={iconSize} color={colors.text} />
 		</TouchableOpacity>
 	)

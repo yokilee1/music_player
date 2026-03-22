@@ -2,6 +2,7 @@ import library from '@/assets/data/library.json'
 import { TracksList } from '@/components/TracksList'
 import { colors, fontSize, screenPaddding } from '@/constants/tokens'
 import { trackTitleFilter } from '@/helper/filter'
+import { generateTracksListId } from '@/helper/miscellaneous'
 import { defaultStyles } from '@/styles'
 import { useMemo, useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
@@ -39,6 +40,7 @@ const SongsScreen = () => {
 				/>
 			</View>
 			<TracksList
+				id={generateTracksListId('songs', search)}
 				tracks={filteredSongs}
 				contentInsetAdjustmentBehavior="automatic"
 				style={[defaultStyles.container, { paddingHorizontal: screenPaddding.horizontal }]}

@@ -1,6 +1,7 @@
 import { TracksList } from '@/components/TracksList'
 import { colors, fontSize, screenPaddding } from '@/constants/tokens'
 import { trackTitleFilter } from '@/helper/filter'
+import { generateTracksListId } from '@/helper/miscellaneous'
 import { useFavourites } from '@/store/library'
 import { defaultStyles } from '@/styles'
 import { useMemo, useState } from 'react'
@@ -39,6 +40,7 @@ const FavouritesScreen = () => {
 				/>
 			</View>
 			<TracksList
+				id={generateTracksListId('favourite', search)}
 				tracks={filteredFavouritesTracks}
 				contentInsetAdjustmentBehavior="automatic"
 				style={[defaultStyles.container, { paddingHorizontal: screenPaddding.horizontal }]}
