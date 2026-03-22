@@ -1,4 +1,4 @@
-import library from '@/assets/data/liarbry.json'
+import library from '@/assets/data/library.json'
 import { TracksList } from '@/components/TracksList'
 import { colors, fontSize, screenPaddding } from '@/constants/tokens'
 import { trackTitleFilter } from '@/helper/filter'

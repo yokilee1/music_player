@@ -6,7 +6,6 @@ import { defaultStyles, utilsStyles } from '@/styles'
 import { FontAwesome } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { Image } from 'expo-image'
-import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -18,7 +17,7 @@ import { PlayerVolumeBar } from './PlayerVolumeBar'
 
 export const FloatingPlayer = ({ style }: ViewProps) => {
 	const [fullScreen, setFullScreen] = useState(false)
-	const router = useRouter()
+
 	const [isFavourite, setFavourite] = useState(false)
 	const activeTrack = useActiveTrack()
 	const { top, bottom } = useSafeAreaInsets()
