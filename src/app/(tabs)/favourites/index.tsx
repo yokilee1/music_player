@@ -43,6 +43,7 @@ const FavouritesScreen = () => {
 				id={generateTracksListId('favourite', search)}
 				tracks={filteredFavouritesTracks}
 				contentInsetAdjustmentBehavior="automatic"
+				hideQueueControls={true}
 				style={[defaultStyles.container, { paddingHorizontal: screenPaddding.horizontal }]}
 			/>
 		</View>

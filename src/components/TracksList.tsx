@@ -3,6 +3,7 @@ import { utilsStyles } from '@/styles'
 import { useRef } from 'react'
 import { FlatList, FlatListProps, Text, View } from 'react-native'
 import TrackPlayer, { Track } from 'react-native-track-player'
+import { QueueControls } from './QueueControls'
 import { TrackListItem } from './TrackListItem'
 
 // export type Track = {
@@ -15,13 +16,20 @@ import { TrackListItem } from './TrackListItem'
 export type TracksListProps = Partial<FlatListProps<Track>> & {
 	tracks: Track[]
 	id: string
+	hideQueueControls?: boolean
 }
 
 const ItemDivider = () => (
 	<View style={{ ...utilsStyles.itemSeparator, marginVertical: 9, marginLeft: 60 }} />
 )
 
-export const TracksList = ({ id, tracks, ...flatlistProps }: TracksListProps) => {
+export const TracksList = ({
+	id,
+	tracks,
+	hideQueueControls = false,
+	ListHeaderComponent: customListHeaderComponent,
+	...flatlistProps
+}: TracksListProps) => {
 	const queueOffset = useRef(0)
 	const { activeQueueId, setActiveQueueId } = useQueue()
 	const handleTrackSelect = async (selectedTrack: Track) => {
@@ -57,10 +65,15 @@ export const TracksList = ({ id, tracks, ...flatlistProps }: TracksListProps) =>
 		// await TrackPlayer.play()
 	}
 
+	const defaultListHeaderComponent = hideQueueControls ? (
+		<QueueControls tracks={tracks} style={{ paddingBottom: 20 }} />
+	) : undefined
+
 	return (
 		<FlatList
 			{...flatlistProps}
 			contentContainerStyle={{ paddingTop: 10, paddingBottom: 128 }}
+			ListHeaderComponent={customListHeaderComponent ?? defaultListHeaderComponent}
 			ListFooterComponent={ItemDivider}
 			ItemSeparatorComponent={ItemDivider}
 			ListEmptyComponent={
