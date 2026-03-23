@@ -1,10 +1,10 @@
 import { UNKNOWN_TRACK_IMAGE } from '@/constants/image'
 import { colors, fontSize } from '@/constants/tokens'
+import { useTrackPlayerFavourite } from '@/hooks/useTrackPlayerFavourite'
 import { defaultStyles, utilsStyles } from '@/styles'
 import { FontAwesome } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { Image } from 'expo-image'
-import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native'
 import Animated, { FadeIn } from 'react-native-reanimated'
 import { Track } from 'react-native-track-player'
@@ -22,11 +22,7 @@ interface FullScreenPlayerProps extends ViewProps {
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity)
 
 export const FullScreenPlayer = ({ style, activeTrack, onPress }: FullScreenPlayerProps) => {
-	const [isFavourite, setFavourite] = useState(false)
-	const toggleFavourite = () => {
-		// TODO: toggle favourite
-		setFavourite(!isFavourite)
-	}
+	const { isFavourite, toggleFavourite } = useTrackPlayerFavourite()
 
 	return (
 		<AnimatedTouchableOpacity

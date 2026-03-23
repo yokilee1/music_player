@@ -13,8 +13,38 @@ interface LibraryState {
 
 export const useLibraryStore = create<LibraryState>()((set) => ({
 	tracks: library,
-	toggleTrackFavourite: () => {},
-	addToPlaylist: () => {},
+	toggleTrackFavourite: (track) =>
+		set((state) => ({
+			tracks: state.tracks.map((currentTrack) => {
+				if (currentTrack.url === track.url) {
+					return {
+						...currentTrack,
+						rating: currentTrack.rating === 1 ? 0 : 1,
+					}
+				}
+				return currentTrack
+			}),
+		})),
+	addToPlaylist: (track, playlistName) =>
+		set((state) => ({
+			tracks: state.tracks.map((currentTrack) => {
+				if (currentTrack.url === track.url) {
+					const existingPlaylists = Array.isArray(currentTrack.playlist)
+						? currentTrack.playlist
+						: []
+					const nextPlaylists = existingPlaylists.includes(playlistName)
+						? existingPlaylists
+						: [...existingPlaylists, playlistName]
+
+					return {
+						...currentTrack,
+						playlist: nextPlaylists,
+					}
+				}
+
+				return currentTrack
+			}),
+		})),
 }))
 
 export const useTracks = () => useLibraryStore((state) => state.tracks)

@@ -1799,6 +1799,11 @@
   resolved "https://registry.npmmirror.com/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.1.tgz"
   integrity sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==
 
+"@react-native-menu/menu@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/@react-native-menu/menu/-/menu-2.0.0.tgz#21d3fcb15687df86386fee7815cc5ff79d26bc9e"
+  integrity sha512-hb8Mirw6aKPGONhgo52IiNpwHtISVrgCT3rMdFX1qS7eOFNzOcQh8d2UDnaH5zVpxN+QuvWtaaiRMGFpIjzdtA==
+
 "@react-native/assets-registry@0.83.2":
   version "0.83.2"
   resolved "https://registry.npmmirror.com/@react-native/assets-registry/-/assets-registry-0.83.2.tgz"

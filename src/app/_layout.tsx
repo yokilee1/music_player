@@ -1,3 +1,4 @@
+import { colors } from '@/constants/tokens'
 import { useLogTrackPlayerState } from '@/hooks/useLogTrackPlayerState'
 import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
 import { SplashScreen, Stack } from 'expo-router'
@@ -34,6 +35,19 @@ const RootNavigation = () => {
 	return (
 		<Stack>
 			<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+			<Stack.Screen
+				name="(modals)/AddToPlaylist"
+				options={{
+					presentation: 'modal',
+					headerStyle: {
+						backgroundColor: colors.background,
+					},
+					headerTitle: 'Add to playlist',
+					headerTitleStyle: {
+						color: colors.text,
+					},
+				}}
+			/>
 		</Stack>
 	)
 }
