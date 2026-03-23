@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		height: 200,
+		marginTop: 20,
 	},
 	artistImage: {
 		width: '60%',

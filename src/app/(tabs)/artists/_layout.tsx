@@ -24,7 +24,12 @@ const ArtistsScreenLayout = () => {
 				options={{
 					headerShown: true,
 					headerTransparent: false,
-					headerTitle: '[name]',
+					headerBackVisible: true,
+					headerStyle: {
+						backgroundColor: colors.background,
+					},
+					headerTintColor: colors.primary,
+					headerTitle: '',
 					headerSearchBarOptions: {
 						placeholder: 'Find in artist',
 						tintColor: colors.primary,
