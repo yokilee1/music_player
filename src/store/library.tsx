@@ -1,5 +1,6 @@
 import library from '@/assets/data/library.json'
-import { Artist, TrackWithPlaylist } from '@/helper/type'
+import { UNKNOWN_TRACK_IMAGE } from '@/constants/image'
+import { Artist, Playlist, TrackWithPlaylist } from '@/helper/type'
 import { useMemo } from 'react'
 import { Track } from 'react-native-track-player'
 import { create } from 'zustand'
@@ -53,4 +54,31 @@ export const useArtists = () => {
 			return acc
 		}, [] as Artist[])
 	}, [tracks]) // 只有当 tracks 真正改变时才重新计算
+}
+
+export const usePlaylist = () => {
+	const tracks = useLibraryStore((state) => state.tracks)
+
+	const playlists = useMemo(() => {
+		return tracks.reduce((acc, track) => {
+			track.playlist?.forEach((playlistName: string) => {
+				const existingPlaylist = acc.find((playlist) => playlist.name === playlistName)
+
+				if (existingPlaylist) {
+					existingPlaylist.tracks.push(track)
+				} else {
+					acc.push({
+						name: playlistName,
+						tracks: [track],
+						artworkPreview: track.artwork ?? UNKNOWN_TRACK_IMAGE,
+					})
+				}
+			})
+			return acc
+		}, [] as Playlist[])
+	}, [tracks])
+
+	const addToPlaylist = useLibraryStore((state) => state.addToPlaylist)
+
+	return { playlists, addToPlaylist }
 }

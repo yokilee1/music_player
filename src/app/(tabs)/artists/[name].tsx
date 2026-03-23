@@ -16,7 +16,7 @@ const ArtistDetailScreen = () => {
 	}
 
 	return (
-		<View>
+		<View style={{ flex: 1 }}>
 			<ArtistTracksList artist={artist} />
 		</View>
 	)
